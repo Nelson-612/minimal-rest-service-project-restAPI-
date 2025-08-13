@@ -35,5 +35,4 @@ def delete_user(deleteUser):
 def basic_auth(username, password, required_scopes=None):
     if username == os.environ.get('ADMIN_USERNAME', 'admin') and password == os.environ.get('ADMIN_PASSWORD', 'password'):
         return {'sub': 'admin'}
-    # optional: raise exception for custom error response
     return None

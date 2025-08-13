@@ -10,11 +10,11 @@ class SteamScraper:
         }
 
     def get_discounted_games(self):
-        # Fetch the page
+        
         response = requests.get(self.url, headers=self.headers)
         soup = BeautifulSoup(response.content, "html.parser")
 
-        # Find all game blocks
+       
         results = soup.find_all("a", class_="search_result_row")
 
         print("🎮 Discounted Games on Steam:\n")
@@ -35,7 +35,3 @@ class SteamScraper:
             games.append(dict)
         return games
 
-# # Example usage
-# if __name__ == "__main__":
-#     scraper = SteamScraper()
-#     scraper.get_discounted_games()

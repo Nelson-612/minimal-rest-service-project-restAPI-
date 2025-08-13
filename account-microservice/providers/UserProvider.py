@@ -31,8 +31,7 @@ class UserProvider(object):
 
 
 	def update_user(self, updateUser):
-		# if self.mycol.count.documents({'_id': updateUser['_id']}, limit=1) != 0: 
-		#     print("Found a user in DB with this id")
+		
 		update_fields = dict(updateUser)
 		
 		update_fields.pop('_id', None)
@@ -43,9 +42,7 @@ class UserProvider(object):
 			return {"message": "Success"}, 201
 		else:
 			return {"error": "user not modified"}, 403
-		# else:
-		#     # user not found
-		#     return {"error": "user not found"}, 409
+		
 		
 	def delete_user(self, deleteUser):
 		try:

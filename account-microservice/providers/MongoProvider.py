@@ -3,8 +3,7 @@ import os
 import pymongo
 from bson import ObjectId
 from bson.json_util import dumps
-from steam_scraper.SteamScraper import SteamScraper  # Make sure steam_scraper.py is in your project and contains SteamScraper class
-
+from steam_scraper.SteamScraper import SteamScraper  
 
 class JSONEncoder(json.JSONEncoder):
 	"""
@@ -51,7 +50,7 @@ class MongoProvider(object):
 			user_query = {"title": gameTitle}
 
 			user = self.mycol.find_one(user_query)
-			# print(f"Found user: {user}")
+			
 			user = JSONEncoder().encode(user)
 			return json.loads(user), 200
 		else:
@@ -67,35 +66,11 @@ class MongoProvider(object):
 		count = self.mycol.count_documents({})
 		print(f"Number of documents in collection: {count}")
 		
-		# Use dumps and parse back to dict for consistent return format
+		
 		json_string = dumps(logs_list)
 		logs_dict = json.loads(json_string)
 		return {"logs": logs_dict}, 200
 	
 
 
-	# def update_user(self, payload):
-		
-	# 	if self.mycol.count_documents({'id': payload['id']}, limit=1) != 0: # Check if user exists in DB
-	# 		print("Found a user in DB with this id")
-	# 		user_query = {"id": payload['id']}
-	# 		new_values = {"$set": payload}
 
-	# 		x = self.mycol.update_one(user_query, new_values)
-	# 		if x.modified_count != 0:
-	# 			return {"message": "Success"}, 201
-	# 		else:
-	# 			return {"error": "user not modified"}, 403
-	# 	else:
-	# 		# user not found
-	# 		return {"error": "user not found"}, 409
-
-	# def delete_user(self, user_id):
-		
-	# 	user_query = {"id": user_id}
-	# 	x = self.mycol.delete_one(user_query)
-	# 	if x.deleted_count != 0:
-	# 		return {"message": "Success"}, 200
-
-	# 	else:
-	# 		return {"error": "user not found"}, 400
